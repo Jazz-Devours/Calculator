@@ -29,21 +29,27 @@ function operate(operator, currentVal, newVal) {
   }
 }
 
-const container = document.querySelector('#container');
-const buttons = document.querySelector('#buttons');
-
-function createCalc(x, y) {
-  for (let y = 0; y < gridSize; y++) {
-    const div = document.createElement('div');
-    div.classList.add('coloumn');
-    container.appendChild(div);
-    for (let x = 0; x < gridSize; x++) {
-    const button = document.createElement('button');
-    button.classList.add('btn');
-    btn.addEventListener('click', selectButton);
-      divx.appendChild(divy)
+function changeDisplay(e) {
+  if (e.target.textContent.search(/[0-9]/) === 0 || e.target.textContent === "." && screen.textContent.indexOf(".") === -1) {
+    return screen.textContent += e.target.textContent;
+  }
+  if (e.target.textContent === "Clear") {
+    return screen.textContent = "";
+  }
+  if (e.target.textContent === "Backspace") {
+    return screen.textContent = screen.textContent.split("").slice(0, screen.textContent.length-1).join("");
+  }
+  if (e.target.textContent === "+/-") {
+    if (screen.textContent.indexOf("-") !== -1) {
+      return screen.textContent = screen.textContent.split("").slice(1).join("");
     }
+    return screen.textContent = "-" + screen.textContent;
   }
 }
 
-createCalc(4, 5);
+const screen = document.querySelector('#screen');
+const buttons = document.querySelectorAll('.btn');
+
+buttons.forEach(btn => {
+  btn.addEventListener('click', changeDisplay);
+});
