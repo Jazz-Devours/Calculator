@@ -1,0 +1,11 @@
+* {
+  background-color: darkslategrey;
+  font-family: cursive;
+  color: blanchedalmond;
+  text-align: center;
+}
+
+h1, p {
+  margin: 2px;
+  padding: 2px;
+}
